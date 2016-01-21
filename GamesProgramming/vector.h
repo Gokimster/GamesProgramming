@@ -1,0 +1,31 @@
+#pragma once
+class vector {
+	public:
+		//variables
+		float x;
+		float y;
+		float z;
+
+		//constructors
+		vector();
+		vector(float, float, float);
+
+		float length();
+		vector normal();
+
+		//scalar operations
+		vector operator+(float scalar);
+		vector operator-(float scalar);
+		vector operator*(float scalar);
+		vector operator/(float scalar);
+
+		//vector operations
+		bool operator==(vector v2);
+		vector operator+(vector v2);
+		vector operator-(vector v2);
+		vector operator*(vector v2);
+		vector operator/(vector v2);
+
+		vector cross(vector v2);
+		float dot(vector v2);
+};
