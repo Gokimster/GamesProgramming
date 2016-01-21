@@ -8,7 +8,6 @@ class vector {
 
 		//constructors
 		vector();
-		vector(vector v);
 		vector(float, float, float);
 
 		float length();

@@ -8,7 +8,7 @@ class Shape
 		vector velocity;
 		vector acceleration;
 
-		Shape(vector position);
+		Shape(vector pos);
 		void addForce();
 
 };
