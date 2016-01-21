@@ -8,10 +8,12 @@ class vector {
 
 		//constructors
 		vector();
+		vector(vector v);
 		vector(float, float, float);
 
 		float length();
 		vector normal();
+		void copy(vector v);
 
 		//scalar operations
 		vector operator+(float scalar);
