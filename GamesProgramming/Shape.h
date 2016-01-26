@@ -11,5 +11,6 @@ class Shape
 
 		Shape(vector pos, float mass);
 		void addForce();
+		void updatePosition(int dt);
 
 };

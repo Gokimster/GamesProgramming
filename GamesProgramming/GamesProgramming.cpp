@@ -3,8 +3,23 @@
 #include "stdafx.h"
 #include "glut.h"
 #include "Ball.h"
+#include <ctime>
+using namespace std;
 
 Ball *b;
+time_t oldTime = 0;
+time_t newTime = 0;
+
+int getDeltaTime()
+{
+	oldTime = newTime;
+	newTime = time(0);
+	if (oldTime == 0)
+	{
+		oldTime = newTime;
+	}
+	return newTime - oldTime;
+}
 
 void initGL()
 {
@@ -18,22 +33,32 @@ void initGL()
 
 void display()
 {
+	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+	glTranslatef(b->pos.x, b->pos.y, b->pos.z);
 	glutSolidSphere(b->radius, 20.0, 20.0);
 	glFlush();
 }
 
+void idleCallBack()
+{
+	int dt = getDeltaTime();
+	b->updatePosition(dt);
+	glutPostRedisplay();
+}
+
 void lab1(int argc, char **argv)
 {
-	b = new Ball(vector(0, 0, 0), 1.0f, 1.0f);
+	b = new Ball(vector(1.0, 3.0, 0.0), 1.0f, 1.0f);
 	GLUquadric *qobj = gluNewQuadric();
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowSize(500, 500);
-	glutCreateWindow("pendulum");
+	glutCreateWindow("Lab1");
 	glutDisplayFunc(display);
+	glutIdleFunc(idleCallBack);
 	initGL();
 	glutMainLoop();\
 }

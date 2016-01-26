@@ -6,4 +6,5 @@ class Ball : public Shape
 	public:
 		float radius;
 		Ball(vector position, float mass, float radius);
+		void updatePosition(int dt);
 };
