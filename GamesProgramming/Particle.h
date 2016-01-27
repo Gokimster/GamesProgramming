@@ -6,6 +6,8 @@ class Particle : public Shape
 	public:
 		Particle(vector position,float mass, int life);
 		bool isAlive();
+		void update(int dt);
 	private:
-		int lifespan;
+		float lifespan;
+		float currLife;
 };

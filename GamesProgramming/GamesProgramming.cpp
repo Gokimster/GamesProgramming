@@ -31,9 +31,9 @@ void initGL()
 	glMatrixMode(GL_MODELVIEW);
 }
 
-void display()
+void displayBall()
 {
-	glClearColor(0.0, 0.0, 0.0, 1.0);
+	glClearColor(1.0, 1.0, 1.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -42,23 +42,55 @@ void display()
 	glFlush();
 }
 
-void idleCallBack()
+void displayParticles()
+{
+	glClearColor(1.0, 1.0, 1.0, 1.0);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	glTranslatef(b->pos.x, b->pos.y, b->pos.z);
+	glutSolidSphere(b->radius, 20.0, 20.0);
+	glFlush();
+}
+
+void idleParticles()
 {
 	int dt = getDeltaTime();
 	b->updatePosition(dt);
 	glutPostRedisplay();
 }
 
+bool checkBallBottom()
+{
+	if (b->pos.y <= -10)
+	{
+		glutIdleFunc(idleParticles);
+		glutDisplayFunc(displayParticles);
+		return true;
+	}
+	return false;
+}
+
+void idleBallFalling()
+{
+	if (!checkBallBottom())
+	{
+		int dt = getDeltaTime();
+		b->updatePosition(dt);
+		glutPostRedisplay();
+	}
+}
+
 void lab1(int argc, char **argv)
 {
-	b = new Ball(vector(1.0, 3.0, 0.0), 1.0f, 1.0f);
+	b = new Ball(vector(0.0, 10.0, 0.0), 1.0f, 1.0f);
 	GLUquadric *qobj = gluNewQuadric();
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowSize(500, 500);
 	glutCreateWindow("Lab1");
-	glutDisplayFunc(display);
-	glutIdleFunc(idleCallBack);
+	glutDisplayFunc(displayBall);
+	glutIdleFunc(idleBallFalling);
 	initGL();
 	glutMainLoop();\
 }
