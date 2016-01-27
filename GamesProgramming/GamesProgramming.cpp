@@ -44,13 +44,6 @@ void displayBall()
 
 void displayParticles()
 {
-	glClearColor(1.0, 1.0, 1.0, 1.0);
-	glClear(GL_COLOR_BUFFER_BIT);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	glTranslatef(b->pos.x, b->pos.y, b->pos.z);
-	glutSolidSphere(b->radius, 20.0, 20.0);
-	glFlush();
 }
 
 void idleParticles()
@@ -62,7 +55,7 @@ void idleParticles()
 
 bool checkBallBottom()
 {
-	if (b->pos.y <= -10)
+	if (b->pos.y <= (-10 + b->radius))
 	{
 		glutIdleFunc(idleParticles);
 		glutDisplayFunc(displayParticles);

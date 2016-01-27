@@ -12,6 +12,6 @@ Shape::Shape(vector pos, float mass)
 void Shape::updatePosition(int dt)
 {
 	//gravity
-	velocity = velocity + (vector(0, -0.98, 0)) * ((float)dt / 1000);
+	velocity = velocity + (vector(0, -2.5, 0)) * ((float)dt / 1000);
 	pos = pos + velocity;
 }
