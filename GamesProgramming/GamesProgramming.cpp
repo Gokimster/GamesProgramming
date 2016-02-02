@@ -7,13 +7,13 @@
 using namespace std;
 
 Ball *b;
-time_t oldTime = 0;
-time_t newTime = 0;
+int oldTime = 0;
+int newTime = 0;
 
 int getDeltaTime()
 {
 	oldTime = newTime;
-	newTime = time(0);
+	newTime = glutGet(GLUT_ELAPSED_TIME);
 	if (oldTime == 0)
 	{
 		oldTime = newTime;
@@ -38,7 +38,7 @@ void displayBall()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	glTranslatef(b->pos.x, b->pos.y, b->pos.z);
-	glutSolidSphere(b->radius, 20.0, 20.0);
+	glutWireSphere(b->radius, 20.0, 20.0);
 	glFlush();
 }
 
@@ -55,10 +55,11 @@ void idleParticles()
 
 bool checkBallBottom()
 {
+	
 	if (b->pos.y <= (-10 + b->radius))
 	{
-		glutIdleFunc(idleParticles);
-		glutDisplayFunc(displayParticles);
+		//glutIdleFunc(idleParticles);
+		//glutDisplayFunc(displayParticles);
 		return true;
 	}
 	return false;
@@ -66,12 +67,14 @@ bool checkBallBottom()
 
 void idleBallFalling()
 {
-	if (!checkBallBottom())
+	if (checkBallBottom() && b->velocity.y < 0)
 	{
-		int dt = getDeltaTime();
-		b->updatePosition(dt);
-		glutPostRedisplay();
+		b->addForce(b->velocity * -1.7);
 	}
+	int dt = getDeltaTime();
+	b->updatePosition(dt);
+	glutPostRedisplay();
+
 }
 
 void lab1(int argc, char **argv)
