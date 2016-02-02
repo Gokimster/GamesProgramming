@@ -12,5 +12,6 @@ class Shape
 		Shape(vector pos, float mass);
 		void addForce(vector f);
 		void updatePosition(int dt);
+		void addVerticalFriction(int dt);
 
 };
