@@ -10,7 +10,7 @@ class Shape
 		float mass;
 
 		Shape(vector pos, float mass);
-		void addForce();
+		void addForce(vector f);
 		void updatePosition(int dt);
 
 };
