@@ -15,3 +15,8 @@ void Shape::updatePosition(int dt)
 	velocity = velocity + (vector(0, -2.5, 0)) * ((float)dt / 1000);
 	pos = pos + velocity;
 }
+
+void Shape::addForce(vector f)
+{
+	velocity = f + velocity;
+}
