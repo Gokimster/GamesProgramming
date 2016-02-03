@@ -1,6 +1,6 @@
 #pragma once
 #include "Particle.h"
-#include <array>;
+#include <array>
 
 class ParticleSystem
 {

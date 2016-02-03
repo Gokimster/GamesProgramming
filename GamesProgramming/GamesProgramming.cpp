@@ -23,30 +23,16 @@ int getDeltaTime()
 	return newTime - oldTime;
 }
 
-void initGL()
-{
-	glClearColor(0.0, 0.0, 0.0, 1.0);
-	glColor3f(0.0, 0.0, 1.0);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluOrtho2D(-10.0, 10.0, -10.0, 10.0);
-	glMatrixMode(GL_MODELVIEW);
-}
-
 void displayBall()
 {
-	glClearColor(1.0, 1.0, 1.0, 1.0);
-	glClear(GL_COLOR_BUFFER_BIT);
-	glMatrixMode(GL_MODELVIEW);
+	RenderManager::clear();
 	RenderManager::renderBall(*b);
 	glFlush();
 }
 
 void displayParticles()
 {
-	glClearColor(1.0, 1.0, 1.0, 1.0);
-	glClear(GL_COLOR_BUFFER_BIT);
-	glMatrixMode(GL_MODELVIEW);
+	RenderManager::clear();
 	glBegin(GL_POINTS);
 	for (int i = 0; i < particles->particle_no; i++)
 	{
@@ -119,14 +105,14 @@ void lab1(int argc, char **argv)
 int main(int argc, char **argv)
 {
 	b = new Ball(vector(0.0, 10.0, 0.0), 1.0f, 1.0f);
-	GLUquadric *qobj = gluNewQuadric();
+	//GLUquadric *qobj = gluNewQuadric();
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowSize(500, 500);
 	glutCreateWindow("Games Programming");
 	lab1(argc, argv);
 	//lab2(argc, argv);
-	initGL();
+	RenderManager::initGL();
 	glutMainLoop();
 }
 
