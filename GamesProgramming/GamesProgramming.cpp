@@ -4,6 +4,7 @@
 #include "glut.h"
 #include "Ball.h"
 #include "ParticleSystem.h"
+#include "RenderBall.h"
 using namespace std;
 
 Ball *b;
@@ -37,9 +38,7 @@ void displayBall()
 	glClearColor(1.0, 1.0, 1.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	glTranslatef(b->pos.x, b->pos.y, b->pos.z);
-	glutWireSphere(b->radius, 20.0, 20.0);
+	RenderBall::render(*b);
 	glFlush();
 }
 
