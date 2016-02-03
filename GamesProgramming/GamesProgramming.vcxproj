@@ -150,7 +150,7 @@
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleSystem.h" />
-    <ClInclude Include="RenderBall.h" />
+    <ClInclude Include="RenderManager.h" />
     <ClInclude Include="Shape.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -161,7 +161,7 @@
     <ClCompile Include="GamesProgramming.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
-    <ClCompile Include="RenderBall.cpp" />
+    <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="Shape.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

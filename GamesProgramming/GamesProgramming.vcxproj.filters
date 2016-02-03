@@ -39,7 +39,7 @@
     <ClInclude Include="ParticleSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RenderBall.h">
+    <ClInclude Include="RenderManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -65,7 +65,7 @@
     <ClCompile Include="ParticleSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RenderBall.cpp">
+    <ClCompile Include="RenderManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

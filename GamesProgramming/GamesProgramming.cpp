@@ -4,7 +4,7 @@
 #include "glut.h"
 #include "Ball.h"
 #include "ParticleSystem.h"
-#include "RenderBall.h"
+#include "RenderManager.h"
 using namespace std;
 
 Ball *b;
@@ -38,7 +38,7 @@ void displayBall()
 	glClearColor(1.0, 1.0, 1.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
-	RenderBall::render(*b);
+	RenderManager::renderBall(*b);
 	glFlush();
 }
 
@@ -50,8 +50,7 @@ void displayParticles()
 	glBegin(GL_POINTS);
 	for (int i = 0; i < particles->particle_no; i++)
 	{
-		glColor4f((float)1 - i / particles->particle_no, 0.0, (float)i/particles->particle_no, (float)particles->particles[i].currLife/particles->particles[i].lifespan);
-		glVertex3f(particles->particles[i].pos.x, particles->particles[i].pos.y, particles->particles[i].pos.z);
+		RenderManager::renderPoint(particles->particles[i], vector((float)1 - i / particles->particle_no, 0.0, (float)i/particles->particle_no), (float)particles->particles[i].currLife/particles->particles[i].lifespan);
 	}
 	glEnd();
 	glFlush();
@@ -105,37 +104,29 @@ void idleBallFalling()
 
 }
 
-void lab1(int argc, char **argv)
-{
-	b = new Ball(vector(0.0, 10.0, 0.0), 1.0f, 1.0f);
-	GLUquadric *qobj = gluNewQuadric();
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitWindowSize(500, 500);
-	glutCreateWindow("Lab1");
-	glutDisplayFunc(displayBall);
-	glutIdleFunc(idleBallFalling);
-	initGL();
-	glutMainLoop();\
-}
-
 void lab2(int argc, char **argv)
 {
-	b = new Ball(vector(0.0, 10.0, 0.0), 1.0f, 1.0f);
-	GLUquadric *qobj = gluNewQuadric();
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitWindowSize(500, 500);
-	glutCreateWindow("Lab1");
+	glutDisplayFunc(displayBall);
+	glutIdleFunc(idleBallFalling);
+}
+
+void lab1(int argc, char **argv)
+{
 	glutDisplayFunc(displayBall);
 	glutIdleFunc(idleBallBouncing);
-	initGL();
-	glutMainLoop(); \
 }
 
 int main(int argc, char **argv)
 {
-	//lab1(argc, argv);
-	lab2(argc, argv);
+	b = new Ball(vector(0.0, 10.0, 0.0), 1.0f, 1.0f);
+	GLUquadric *qobj = gluNewQuadric();
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitWindowSize(500, 500);
+	glutCreateWindow("Games Programming");
+	lab1(argc, argv);
+	//lab2(argc, argv);
+	initGL();
+	glutMainLoop();
 }
 
