@@ -6,7 +6,10 @@ class ParticleSystem
 {
 	public:
 		ParticleSystem(vector pos, float particleLife, float particleVelocity);
-		std::array <Particle, 360> particles;
+		int particle_no = 360;
+		Particle particles[360];
+		//std::array <Particle, 360> *particles;
+		void updateParticles(int dt);
 	private:
 		void initParticleSystem();
 		vector pos;

@@ -6,13 +6,21 @@ Particle::Particle(vector position, float mass, float lifespan):Shape(position, 
 	this->currLife = lifespan;
 }
 
+Particle::Particle()
+{
+
+}
+
 bool Particle::isAlive()
 {
-	return ( lifespan > 0);
+	return ( currLife > 0);
 }
 
 void Particle::update(int dt)
 {
-	Shape::updatePosition(dt);
-	currLife - dt / 1000;
+	pos = pos + (velocity*((float)dt / 1000));
+	if (dt > 0)
+	{
+		currLife -= (float)dt / (float)1000;
+	}
 }
