@@ -148,6 +148,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
+    <ClInclude Include="Boid.h" />
+    <ClInclude Include="BoidsManager.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="RenderManager.h" />
@@ -158,6 +160,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="Boid.cpp" />
+    <ClCompile Include="BoidsManager.cpp" />
     <ClCompile Include="GamesProgramming.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />

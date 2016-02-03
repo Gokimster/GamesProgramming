@@ -28,7 +28,6 @@ void ParticleSystem::initParticleSystem()
 
 void ParticleSystem::updateParticles(int dt)
 {
-	int i = 0;
 	for (int i = 0; i < particle_no; i++)
 	{
 		if (particles[i].isAlive())
