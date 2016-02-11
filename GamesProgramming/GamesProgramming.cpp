@@ -140,7 +140,7 @@ void idleBoids()
 
 void lab3(int argc, char **argv)
 {
-	boids = new BoidsManager(vector(0, 0, 0));
+	boids = new BoidsManager(vector(0, 0, 0), 1);
 	glutDisplayFunc(displayBoids);
 	glutIdleFunc(idleBoids);
 }
@@ -153,11 +153,11 @@ int main(int argc, char **argv)
 	b = new Ball(vector(0.0, 10.0, 0.0), 1.0f, 1.0f);
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitWindowSize(500, 500);
+	glutInitWindowSize(500, 500);	
 	glutCreateWindow("Games Programming");
-	lab1(argc, argv);
+	//lab1(argc, argv);
 	//lab2(argc, argv);
-	//lab3(argc, argv);
+	lab3(argc, argv);
 	RenderManager::initGL();
 	glutMainLoop();
 }
