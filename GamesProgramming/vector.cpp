@@ -26,7 +26,11 @@ float vector::length()
 
 vector vector::normal()
 {
-	return vector(x / length(), y / length(), z / length());
+	if (length() != 0)
+	{
+		return vector(x / length(), y / length(), z / length());
+	}
+	return vector(0, 0, 0);
 }
 
 void vector::copy(vector v)
@@ -34,6 +38,11 @@ void vector::copy(vector v)
 	x = v.x;
 	y = v.y;
 	z = v.z;
+}
+
+float vector::distance(vector v)
+{
+	return sqrtf(x - v.x + y - v.y + z - v.z);
 }
 
 //===========================

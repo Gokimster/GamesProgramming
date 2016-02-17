@@ -134,13 +134,13 @@ void displayBoids()
 void idleBoids()
 {
 	int dt = getDeltaTime();
-	boids->updateBoids(dt);
+	boids->updateBoids(dt, 10);
 	glutPostRedisplay();
 }
 
 void lab3(int argc, char **argv)
 {
-	boids = new BoidsManager(vector(0, 0, 0), 1);
+	boids = new BoidsManager(vector(0, 0, 0), 3, 1);
 	glutDisplayFunc(displayBoids);
 	glutIdleFunc(idleBoids);
 }
