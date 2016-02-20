@@ -5,7 +5,7 @@ class BoidsManager
 {
 public:
 	BoidsManager(vector pos, float boidSpeed, float nSize);
-	int boids_no = 40;
+	int boids_no = 100;
 	Boid boids[205];
 	void updateBoids(int dt, int posBounds);
 private:

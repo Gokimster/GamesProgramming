@@ -37,21 +37,19 @@ void BoidsManager::updateBoids(int dt, int posBounds)
 			if (!added)
 			{
 				Boid n = boids[x];
-				if (!added && wSize - abs(b.pos.y) < nSize && wSize - abs(b.pos.x) < nSize)
+				if (wSize - abs(b.pos.y) < nSize && wSize - abs(b.pos.x) < nSize)
 				{
-					n.pos.x = n.pos.x + (wSize * n.pos.x / abs(n.pos.x) * -wSize);
-					n.pos.y = n.pos.y + (wSize * n.pos.y / abs(n.pos.y) * -wSize);
-					neighbours[j++] = n;
-					added = true;
+					n.pos.x = n.pos.x + (wSize * n.pos.x / abs(n.pos.x) * -2);
+					n.pos.y = n.pos.y + (wSize * n.pos.y / abs(n.pos.y) * -2);
 				}
 				else {
-					if (wSize - abs(b.pos.x) < nSize && !added)
+					if (wSize - abs(b.pos.x) < nSize)
 					{
-						n.pos.x = n.pos.x + (wSize * n.pos.x / abs(n.pos.x) * -wSize);
+						n.pos.x = n.pos.x + (wSize * n.pos.x / abs(n.pos.x) * -2);
 					}
-					if (wSize - abs(b.pos.y) < nSize && !added)
+					if (wSize - abs(b.pos.y) < nSize)
 					{
-						n.pos.y = n.pos.y + (wSize * n.pos.y / abs(n.pos.y) * -wSize);
+						n.pos.y = n.pos.y + (wSize * n.pos.y / abs(n.pos.y) * -2);
 					}
 				}
 				if (b.pos.distance(n.pos) < nSize)
@@ -83,7 +81,7 @@ void BoidsManager::initBoids()
 	srand(time(0));
 	for (int i = 0; i < boids_no; i++)
 	{
-		boids[i] = Boid(pos, (boidSpeed + 1.0 + rand() / (RAND_MAX / (-1.0 - 1.0))));
+		boids[i] = Boid((pos + (1.0 + rand() / (RAND_MAX / (-1 - 1)))), (boidSpeed + 1.0 + rand() / (RAND_MAX / (-0.2 - 0.2))));
 		//boids[i] = Boid(pos, boidSpeed);
 		boids[i].addForce(vector((1.0 + rand() / (RAND_MAX / (-1.0 - 1.0))), (1.0 + rand() / (RAND_MAX / (-1.0 - 1.0))), 0));
 	}

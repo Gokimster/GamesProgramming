@@ -141,7 +141,7 @@ void idleBoids()
 
 void lab3(int argc, char **argv)
 {
-	boids = new BoidsManager(vector(0, 0, 0), 3, 2);
+	boids = new BoidsManager(vector(0, 0, 0), 3, 3);
 	glutDisplayFunc(displayBoids);
 	glutIdleFunc(idleBoids);
 }
