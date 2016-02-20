@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "BoidsManager.h"
 #include <random>
+#include <time.h>
+#include <algorithm>
 
 BoidsManager::BoidsManager(vector pos, float boidSpeed, float nSize)
 {
@@ -12,32 +14,77 @@ BoidsManager::BoidsManager(vector pos, float boidSpeed, float nSize)
 
 void BoidsManager::updateBoids(int dt, int posBounds)
 {
+	int wSize = 9;
+	Boid * iterate = new Boid[boids_no];
 	for (int i = 0; i < boids_no; i++)
 	{
-		if (boids[i].pos.x < -10 || boids[i].pos.x > 10 || boids[i].pos.y < -10 || boids[i].pos.y > 10)
-		{
-			boids[i].pos.x = -boids[i].pos.x;
-			boids[i].pos.y = -boids[i].pos.y;
-		}
-		Boid * neighbours = new Boid[360];
+		Boid * neighbours = new Boid[boids_no];
 		int j = 0;
 		Boid b = boids[i];
 		for (int x = 0; x < boids_no; x++)
 		{
-			if (abs(b.pos.distance(boids[x].pos)) < nSize)
+			if (x == i)
+			{
+				break;
+			}
+			bool added = false;
+			if (b.pos.distance(boids[x].pos) < nSize)
 			{
 				neighbours[j++] = boids[x];
+				added = true;
 			}
+			//wrap the neighbourhood around window
+			if (!added)
+			{
+				Boid n = boids[x];
+				if (!added && wSize - abs(b.pos.y) < nSize && wSize - abs(b.pos.x) < nSize)
+				{
+					n.pos.x = n.pos.x + (wSize * n.pos.x / abs(n.pos.x) * -wSize);
+					n.pos.y = n.pos.y + (wSize * n.pos.y / abs(n.pos.y) * -wSize);
+					neighbours[j++] = n;
+					added = true;
+				}
+				else {
+					if (wSize - abs(b.pos.x) < nSize && !added)
+					{
+						n.pos.x = n.pos.x + (wSize * n.pos.x / abs(n.pos.x) * -wSize);
+					}
+					if (wSize - abs(b.pos.y) < nSize && !added)
+					{
+						n.pos.y = n.pos.y + (wSize * n.pos.y / abs(n.pos.y) * -wSize);
+					}
+				}
+				if (b.pos.distance(n.pos) < nSize)
+				{
+					neighbours[j++] = n;
+				}
+			}
+				
 		}
-		boids[i].update(dt, neighbours, j);
+		b.update(dt, neighbours, j);
+		if (abs(b.pos.x) > wSize)
+		{
+			b.pos.x = b.pos.x + 2 * wSize * (b.pos.x) / abs(b.pos.x) * -1;
+		}
+		if (abs(b.pos.y) > wSize)
+		{
+			b.pos.y = b.pos.y + 2 * wSize * (b.pos.y) / abs(b.pos.y) * -1;
+		}
+		iterate[i] = b;
+	}
+	for (int i = 0; i < boids_no; i++)
+	{
+		boids[i] = iterate[i];
 	}
 }
 
 void BoidsManager::initBoids()
 {
+	srand(time(0));
 	for (int i = 0; i < boids_no; i++)
 	{
 		boids[i] = Boid(pos, (boidSpeed + 1.0 + rand() / (RAND_MAX / (-1.0 - 1.0))));
+		//boids[i] = Boid(pos, boidSpeed);
 		boids[i].addForce(vector((1.0 + rand() / (RAND_MAX / (-1.0 - 1.0))), (1.0 + rand() / (RAND_MAX / (-1.0 - 1.0))), 0));
 	}
 }

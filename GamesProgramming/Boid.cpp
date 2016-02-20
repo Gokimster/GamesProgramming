@@ -13,19 +13,18 @@ Boid::Boid()
 
 void Boid::update(int dt, Boid neighbourhood[], int nSize)
 {
-	if (nSize > 1)
+	if (nSize > 0)
 	{
 		vector align = alignment(neighbourhood, nSize);
 		vector cohes = cohesion(neighbourhood, nSize);
 		vector sep = separation(neighbourhood, nSize);
-		velocity.x += align.x * 0.6 + cohes.x * 0.7 + sep.x * 0.2;
-		velocity.y += align.y * 0.6 + cohes.y * 0.7 + sep.y * 0.2;
+		velocity.x += align.x   * 1.0+ cohes.x * 1 + sep.x * 1.2;
+		velocity.y += align.y * 1.0 + cohes.y * 1.0 + sep.y * 1.2;
 		velocity.z = 0;
 	}
 
 	velocity = velocity.normal();
-	velocity = velocity * speed;
-	pos = pos + (velocity * ((float)dt / 1000));
+	pos = pos + (velocity * ((float)dt / 1000) * speed);
 }
 
 vector Boid::alignment(Boid neighbourhood[], int nSize)
@@ -55,6 +54,7 @@ vector Boid::cohesion(Boid neighbourhood[], int nSize)
 	v.y /= nSize;
 	v.x = v.x - pos.x;
 	v.y = v.y - pos.y;
+	v = v.normal();
 	return v;
 }
 
@@ -70,5 +70,6 @@ vector Boid::separation(Boid neighbourhood[], int nSize)
 	v.y /= nSize;
 	v.x = -(v.x - pos.x);
 	v.y = -(v.y - pos.y);
+	v = v.normal();
 	return v;
 }

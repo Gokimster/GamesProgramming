@@ -42,7 +42,7 @@ void vector::copy(vector v)
 
 float vector::distance(vector v)
 {
-	return sqrtf(x - v.x + y - v.y + z - v.z);
+	return sqrtf(pow(x - v.x, 2) + pow(y - v.y, 2) + pow(z - v.z, 2));
 }
 
 //===========================

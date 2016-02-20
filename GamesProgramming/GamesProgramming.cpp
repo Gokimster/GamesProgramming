@@ -125,7 +125,8 @@ void displayBoids()
 	glBegin(GL_POINTS);
 	for (int i = 0; i < boids->boids_no; i++)
 	{
-		RenderManager::renderPoint(boids->boids[i], vector(0,0,1), 0);
+		//RenderManager::renderPoint(boids->boids[i], vector(0,0,1), 0);
+		RenderManager::renderBall(Ball(boids->boids[i].pos, 0.1, 0.1));
 	}
 	glEnd();
 	glFlush();
@@ -140,7 +141,7 @@ void idleBoids()
 
 void lab3(int argc, char **argv)
 {
-	boids = new BoidsManager(vector(0, 0, 0), 3, 1);
+	boids = new BoidsManager(vector(0, 0, 0), 3, 2);
 	glutDisplayFunc(displayBoids);
 	glutIdleFunc(idleBoids);
 }
